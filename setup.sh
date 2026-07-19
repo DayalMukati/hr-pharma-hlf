@@ -15,4 +15,10 @@ if [ $? -ne 0 ]; then
     exit 1
 fi
 
+# Remove the clone's git metadata. The challenge IDE initializes its own git
+# repository in this directory; leaving our .git behind makes its "git init" hit
+# an existing repo and its "git remote add origin" fail with
+# "remote origin already exists".
+rm -rf "$TARGET_DIR/.git"
+
 echo "Setup complete. Files downloaded."
